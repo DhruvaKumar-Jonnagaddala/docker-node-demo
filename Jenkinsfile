@@ -15,10 +15,8 @@ pipeline {
         ENVIRONMENT='dev'
         DOCKER_REPOSITORY='482016542819.dkr.ecr.eu-west-1.amazonaws.com'
         APP_NAME='nodejs-app'
-        // REPO_LINK='https://github.com/DhruvaNam/docker-node-demo.git'
     }
     options{
-        // skipDefaultCheckout()
         timeout(time:48,unit:'HOURS')
         disableConcurrentBuilds()
         buildDiscarder(logRotator(numToKeepStr: '5'))
@@ -27,7 +25,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-            // checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/${BRANCH_NAME}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: "${REPO_LINK}"]]]
             script {
             env.SOURCE_HASH = sh ( script: 'git rev-parse HEAD | cut -c1-6',returnStdout: true).trim()
             }   
@@ -97,19 +94,19 @@ pipeline {
         }
         success {
             echo "Sucess"
-            //notifyBuild("SUCCESS")
+            notifyBuild("SUCCESS")
         }
         failure {
             echo "Success"
-            //notifyBuild("FAILED")
+            notifyBuild("FAILED")
         }
         unstable {
             echo "Success"
-            //notifyBuild("UNSTABLE")
+            notifyBuild("UNSTABLE")
         }
         aborted {
             echo "Success"
-            //notifyBuild("ABORTED")
+            notifyBuild("ABORTED")
         }
     }
 }
