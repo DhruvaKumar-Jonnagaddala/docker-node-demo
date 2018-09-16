@@ -6,9 +6,6 @@ pipeline {
         nodejs "node-6.3.1"
     }
     environment{
-        AWS_ID = credentials("servana-aws-creds")
-        AWS_ACCESS_KEY_ID = "${env.AWS_ID_USR}"
-        AWS_SECRET_ACCESS_KEY = "${env.AWS_ID_PSW}"
         AWS_DEFAULT_REGION = 'eu-west-1'
         AWS_DEFAULT_OUTPUT = 'json'
         DEVELOPERS_EMAIL="dhruva@servana.net"
